@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
+  <h1> KETTLINGUR </h1>
+  <h2> Kittens for EVERYONE </h2>
+
+  <nav>
+    <ul>
+      <li> <%= link_to "Register Here", new_user_registration_path %> </li>
+      <li> <%= link_to "Sign In", user_session_path %> </li>
+      <li> <%= link_to "Sign Out", destroy_user_session_path %> </li>
+    </ul>
+  </nav>
+
+  <%= yield %>
 
 </body>
 </html>
