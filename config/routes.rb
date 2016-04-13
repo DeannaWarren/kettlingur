@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'users/:id' => 'users#view'
+  resources :users, only: :show
   resources :cats
   root 'welcome#index'
   # get 'welcome/index'
