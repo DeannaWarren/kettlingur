@@ -14,7 +14,7 @@
 </head>
 <body>
   <h1> KETTLINGUR </h1>
-  <%= "Welcome, #{current_user.email}!" if current_user %></li>
+  <%= "Welcome, #{current_user.username}!" if current_user %></li>
   <nav class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,13 +26,14 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
         <li><%= link_to "Home", root_path  %></li>
-        <li><%= link_to "Sign In", new_user_session_path  %></li>
-        <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to "Edit Account", edit_user_registration_path %></li>
         <% if current_user %>
+          <li><%= link_to "Edit Account", edit_user_registration_path %></li>
           <li><%= link_to "Your Account", user_path(id: current_user.id) %></li>
+          <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Sign In", new_user_session_path  %></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
