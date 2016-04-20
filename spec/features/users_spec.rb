@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature "User", type: :feature, js: true do
+  let(:user_details){{
+      username: "fluffyBunny",
+      email: "user@email.com",
+      password: "password"
+    }}
 
   describe "who is signed out or a guest" do
     it "can sign in with previous account" do
-      user_details = {
-        username: "fluffyBunny",
-        email: "user@email.com",
-        password: "password"
-      }
       User.create!(user_details)
       visit root_path
       click_link("Sign In")
@@ -51,47 +51,23 @@ RSpec.feature "User", type: :feature, js: true do
   end
 
   describe "who is signed in" do
-    it "can sign out" do
-      user_details = {
-        username: "fluffyBunny",
-        email: "user@email.com",
-        password: "password"
-      }
-      User.create!(user_details)
+    before(:each) do
+      user = User.create!(user_details)
       visit root_path
       click_link("Sign In")
-      fill_in "Email", with: "user@email.com"
-      fill_in "Password", with: "password"
+      fill_in "Email", with: user_details[:email]
+      fill_in "Password", with: user_details[:password]
       click_on("Log in")
+    end
+
+    it "can sign out" do
       click_on("Sign Out")
       expect(page).to have_content("Sign In")
     end
     it "cannot see sign in option" do
-      user_details = {
-        username: "fluffyBunny",
-        email: "user@email.com",
-        password: "password"
-      }
-      User.create!(user_details)
-      visit root_path
-      click_link("Sign In")
-      fill_in "Email", with: "user@email.com"
-      fill_in "Password", with: "password"
-      click_on("Log in")
       expect(page).to_not have_content("Sign In")
     end
     it "cannot see sign up option" do
-      user_details = {
-        username: "fluffyBunny",
-        email: "user@email.com",
-        password: "password"
-      }
-      User.create!(user_details)
-      visit root_path
-      click_link("Sign In")
-      fill_in "Email", with: "user@email.com"
-      fill_in "Password", with: "password"
-      click_on("Log in")
       expect(page).to_not have_content("Sign Up")
     end
   end
