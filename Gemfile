@@ -28,16 +28,17 @@ gem 'jquery-rails'
 
 gem 'devise'
 
-group :development, :test do
+group :test do
+  gem 'simplecov', require: false
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
 end
 
-group :test do
-  gem 'database_cleaner'
-end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
