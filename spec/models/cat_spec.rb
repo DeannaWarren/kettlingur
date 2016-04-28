@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Cat, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  describe "when creating" do
+    context "gen one cats" do
+      it "does not need parents" do
+        cat = Cat.gen_one_create
+        expect(cat.gen_one).to eq(true)
+      end
+    end
+  end
 end

@@ -1,12 +1,10 @@
 require 'rails_helper'
-
 RSpec.feature "User", type: :feature, js: true do
   let(:user_details){{
       username: "fluffyBunny",
       email: "user@email.com",
       password: "password"
     }}
-
   describe "who is signed out or a guest" do
     it "can sign in with previous account" do
       User.create!(user_details)
@@ -49,7 +47,6 @@ RSpec.feature "User", type: :feature, js: true do
       expect(page).to_not have_content("Edit Account")
     end
   end
-
   describe "who is signed in" do
     before(:each) do
       user = User.create!(user_details)
@@ -59,7 +56,6 @@ RSpec.feature "User", type: :feature, js: true do
       fill_in "Password", with: user_details[:password]
       click_on("Log in")
     end
-
     it "can sign out" do
       click_on("Sign Out")
       expect(page).to have_content("Sign In")
@@ -71,5 +67,4 @@ RSpec.feature "User", type: :feature, js: true do
       expect(page).to_not have_content("Sign Up")
     end
   end
-
 end

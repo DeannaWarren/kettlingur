@@ -3,27 +3,15 @@ class CatsController < ApplicationController
   end
 
   def create
-    @cat = Cat.new(cat_params)
-    @cat.name = "Unnamed"
-    @cat.age = 0
-    @cat.user_id = current_user.id
-    if @cat.gen_one == true
-      @cat.coat_color = 0
-      @cat.marking_color = 0
-      @cat.coat_pattern = 0
-      @cat.marking_pattern = 0
-    else
-      #breeding logic here
-    end
+  end
+
+  def new
+    @cat = Cat.new({gen_one: true})
     if @cat.save
       redirect_to @cat
     else
       render 'new'
     end
-  end
-
-  def new
-    @cat = Cat.new(gen_one: true)
   end
 
   def edit
